@@ -43,6 +43,12 @@ const Editor = () => {
 
         {notificationVisibile && <div className="notification">Make sure you're including your best work only!</div>}
 
+        <div className="template-container">
+          <div className="template-options">
+            <h2>Choose Template</h2>
+          </div>
+        </div>
+
         <div className="design-container">
             <span>Designer</span>
         </div>
@@ -218,7 +224,9 @@ const Editor = () => {
       </div>
 
       <div className="preview">
-          <div className="details-design-toggle"></div>
+          <div className="details-design-toggle">
+          <i class="fa-solid fa-grip"></i>
+          </div>
         <div class="page">
           <h1>{name}</h1>
           <h2>{jobTitle}</h2>
