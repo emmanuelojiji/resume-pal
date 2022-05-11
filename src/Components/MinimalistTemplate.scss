@@ -1,0 +1,54 @@
+.MinimalistTemplate{
+
+.minimalist-header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 200px;
+    background: #d4d4d4;
+    margin-left: -50px;
+    margin-right: -50px;
+    margin-top: -50px;
+    padding-left: 50px;
+    padding-right: 50px;
+    text-transform: uppercase;
+    margin-bottom: 50px;
+}
+
+
+.minimalist-name{
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 2px;
+    letter-spacing: 2px;
+    }
+
+    .content-row{
+        margin-bottom: 50px;
+    }
+
+    .minimalist-job-title{
+        font-size: 14px;
+    }
+
+    .minimalist-heading{
+        font-weight: bold;
+        margin-bottom: 20px;
+    }
+
+    .page-experience-entry-preview{
+        margin-bottom: 20px;
+    }
+   
+
+    .page-experience-entry{
+        margin-bottom: 20px;
+    }
+
+    .page-experience-entry-left{
+        margin-right: 20px;
+    }
+
+}
+
+

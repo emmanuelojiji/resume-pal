@@ -12,7 +12,10 @@ const Home = () => {
       <section className="billboard">
         <div className="page-width">
           <h1>We make resumes look beautiful.</h1>
-          <p>So that's why we're here.</p>
+          <p>
+            With our simple and interactive editor, you can be job ready within
+            minutes.
+          </p>
           <Link to="/editor" className="button">
             Create My Resume
           </Link>
@@ -87,7 +90,7 @@ const Home = () => {
             </div>
 
             <div className="feature-box">
-              <h3>Live Preview</h3>
+              <h3>Modern Templates</h3>
             </div>
           </div>
         </div>

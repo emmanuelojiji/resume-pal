@@ -68,7 +68,7 @@
       border-radius: 500px;
       position: fixed;
       bottom: 25px;
-      left: 35%;
+      right: 25px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -153,6 +153,7 @@
     z-index: 1;
     border-radius: 8px;
     border: solid 1px #d1d1d1;
+    display: none;
 }
 
 .template-container{
@@ -165,9 +166,14 @@
   display: flex;
   align-items: flex-end;
   color: white;
+  opacity: 0;
+
+  
+
 
   h2{
     font-size: 24px;
+    margin-bottom: 30px;
   }
 
   .template-options{
@@ -176,9 +182,63 @@
     background: #191919;
     padding-left: 30px;
     padding-top: 30px;
+  
+  }
+
+  .template-preview{
+    height: 300px;
+    width: 200px;
+    background: white;
+    border-radius: 5px;
+
+  }
+
+  .template-preview-wrap{
+    display: flex;
+    gap: 20px;
+  }
+
+  .template-preview-name{
+    margin-top: 12px;
   }
 }
 
 
+@keyframes fade-in {
+  from{
+    visibility: hidden;
+    opacity: 0;
+  }
+
+  to {
+    visibility: visible;
+    opacity: 1;
+  }
+}
+
+@keyframes fade-out {
+  from{
+  visibility: visible;
+  opacity: 1;
+  }
+
+  to {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+.fade-in{
+  visibility: visible;
+  opacity:1;
+  transition: opacity 0.3s;
+
+}
+
+.fade-out{
+  visibility: hidden;
+  opacity:0;
+  transition: opacity 0.5s;
+}
 
 

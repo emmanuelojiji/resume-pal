@@ -3,16 +3,22 @@ import "./Editor.scss";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 
+import MinimalistTemplate from "../Components/MinimalistTemplate";
+
 const Editor = () => {
   const [editorView, setEditorView] = useState("personal");
 
+  const [templatesVisible, setTemplatesVisible] = useState(false);
   const [notificationVisibile, setNotificationVisibile] = useState(false);
 
+  const [selectedTemplate, setSelectedTemplate] = useState("minimalist");
+
   const [name, setName] = useState();
+  const [profile, setProfile] = useState();
   const [jobTitle, setJobTitle] = useState();
   const [address, setAddress] = useState();
   const [phoneNumber, setPhoneNumber] = useState();
-  const [emailAddress, setEmailAddress] = useState();
+  const [email, setEmail] = useState();
 
   const [addingExperience, setAddingExperience] = useState(false);
 
@@ -36,23 +42,73 @@ const Editor = () => {
     experienceCompany: experienceCompany,
     experienceStartYear: experienceStartYear,
     experienceEndYear: experienceEndYear,
+    experienceJobDescription: experienceJobDescription,
   };
 
   return (
     <div className="Editor">
+      {notificationVisibile && (
+        <div className="notification">
+          Make sure you're including your best work only!
+        </div>
+      )}
 
-        {notificationVisibile && <div className="notification">Make sure you're including your best work only!</div>}
+      <div
+        className={`template-container ${
+          templatesVisible ? "fade-in" : "fade-out"
+        } `}
+        onClick={() => setTemplatesVisible(false)}
+      >
+        <div className="template-options">
+          <h2>Choose Template</h2>
 
-        <div className="template-container">
-          <div className="template-options">
-            <h2>Choose Template</h2>
+          <div className="template-preview-wrap">
+            <div>
+              <div
+                className="template-preview"
+                style={{
+                  border:
+                    selectedTemplate === "minimalist" && "4px solid #1b91f0",
+                }}
+              ></div>
+              <span class="template-preview-name">Minimalist</span>
+            </div>
+
+            <div
+              className="template-preview"
+              style={{
+                border:
+                  selectedTemplate === "minimalists" && "4px solid #1b91f0",
+              }}
+            ></div>
+
+            <div
+              className="template-preview"
+              style={{
+                border: selectedTemplate === "x" && "4px solid #1b91f0",
+              }}
+            ></div>
+
+            <div
+              className="template-preview"
+              style={{
+                border: selectedTemplate === "x" && "4px solid #1b91f0",
+              }}
+            ></div>
+
+            <div
+              className="template-preview"
+              style={{
+                border: selectedTemplate === "x" && "4px solid #1b91f0",
+              }}
+            ></div>
           </div>
         </div>
+      </div>
 
-        <div className="design-container">
-            <span>Designer</span>
-        </div>
-
+      <div className="design-container">
+        <span>Designer</span>
+      </div>
 
       <div className="controls">
         <Link to="/" className="back">
@@ -129,9 +185,18 @@ const Editor = () => {
                   <input
                     type="text"
                     placeholder="Email Address"
-                    onChange={(e) => setEmailAddress(e.target.value)}
-                    value={emailAddress}
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
                   ></input>
+                </div>
+
+                <div className="input-wrap">
+                  <textarea
+                    type="text"
+                    placeholder="Profile"
+                    onChange={(e) => setProfile(e.target.value)}
+                    value={profile}
+                  ></textarea>
                 </div>
               </div>
             );
@@ -195,8 +260,8 @@ const Editor = () => {
                         console.log(experienceArray);
                         setAddingExperience(false);
 
-                        if (experienceArray.length == 2) {
-                          setNotificationVisibile(true)
+                        if (experienceArray.length == 3) {
+                          setNotificationVisibile(true);
                         }
                       }}
                     >
@@ -224,23 +289,28 @@ const Editor = () => {
       </div>
 
       <div className="preview">
-          <div className="details-design-toggle">
+        <div
+          className="details-design-toggle"
+          onClick={() => setTemplatesVisible(true)}
+        >
           <i class="fa-solid fa-grip"></i>
-          </div>
+        </div>
         <div class="page">
-          <h1>{name}</h1>
-          <h2>{jobTitle}</h2>
-
-          {experienceArray.map((experience) => {
-            return <h6>{experience.experienceJobTitle}</h6>;
-          })}
-
-          {addingExperience && (
-            <div class="page-experience-container">
-              <h6>{experienceJobTitle}</h6>
-              <p>{experienceCompany}</p>
-            </div>
-          )}
+          <MinimalistTemplate
+            name={name}
+            jobTitle={jobTitle}
+            phoneNumber={phoneNumber}
+            email={email}
+            address={address}
+            profile={profile}
+            experienceArray={experienceArray}
+            addingExperience={addingExperience}
+            experienceJobTitle={experienceJobTitle}
+            experienceCompany={experienceCompany}
+            experienceStartYear={experienceStartYear}
+            experienceEndYear={experienceEndYear}
+            experienceJobDescription={experienceJobDescription}
+          />
         </div>
       </div>
     </div>
