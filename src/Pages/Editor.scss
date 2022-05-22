@@ -33,7 +33,7 @@
       margin-bottom: 30px;
     }
 
-    .add-experience {
+    .add-button {
       margin-bottom: 30px;
     }
 
@@ -112,6 +112,17 @@
 
   &:nth-child(4) {
     border-top: solid 1px #e1e2e4;
+  }
+}
+
+.checkbox-wrap{
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+  font-size: 14px;
+
+  span{
+    margin-left: 6px;
   }
 }
 

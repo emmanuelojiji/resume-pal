@@ -14,6 +14,11 @@ const MinimalistTemplate = ({
   experienceStartYear,
   experienceEndYear,
   experienceJobDescription,
+  addingEducation,
+  educationArray,
+  schoolName,
+  educationStartYear,
+  educationEndYear,
 }) => {
   return (
     <div className="MinimalistTemplate">
@@ -59,11 +64,41 @@ const MinimalistTemplate = ({
                 <span>{experience.experienceCompany}</span>
                 <div>
                   <span>
-                    {experience.experienceStartYear} -{" "}
+                    {experience.experienceStartYear} -
                     {experience.experienceEndYear}
                   </span>
                 </div>
                 <span>{experience.experienceJobDescription}</span>
+              </div>
+            </>
+          );
+        })}
+      </div>
+
+      <div class="content-row">
+      <span className="minimalist-heading">EDUCATION</span>
+        {addingEducation && (
+          <div class="page-experience-entry entry-preview">
+            <span>{schoolName}</span>
+            <div>
+              <span>
+                {educationStartYear} - {educationEndYear}
+              </span>
+            </div>
+            <span>{experienceJobDescription}</span>
+          </div>
+        )}
+
+        {educationArray.map((education) => {
+          return (
+            <>
+              <div className="page-experience-entry">
+                <span>{education.schoolName}</span>
+                <div>
+                  <span>
+                    {education.educationStartYear} -{education.educationEndYear}
+                  </span>
+                </div>
               </div>
             </>
           );

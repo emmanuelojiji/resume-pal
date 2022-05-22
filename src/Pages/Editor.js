@@ -28,6 +28,13 @@ const Editor = () => {
   const [experienceStartYear, setExperienceStartYear] = useState();
   const [experienceEndYear, setExperienceEndYear] = useState();
   const [experienceJobDescription, setExperienceJobDescription] = useState();
+  const [currently, setCurrently] = useState(false);
+
+  const [addingEducation, setAddingEducation] = useState(false);
+  const [educationArray, setEducationArray] = useState([]);
+  const [schoolName, setSchoolName] = useState();
+  const [educationStartYear, setEducationStartYear] = useState();
+  const [educationEndYear, setEducationEndYear] = useState();
 
   const clearExperienceFields = () => {
     setExperienceJobTitle();
@@ -37,12 +44,24 @@ const Editor = () => {
     setExperienceJobDescription();
   };
 
+  const clearEducationFields = () => {
+    setSchoolName("");
+    setEducationStartYear("");
+    setEducationEndYear("");
+  };
+
   const experienceObject = {
     experienceJobTitle: experienceJobTitle,
     experienceCompany: experienceCompany,
     experienceStartYear: experienceStartYear,
     experienceEndYear: experienceEndYear,
     experienceJobDescription: experienceJobDescription,
+  };
+
+  const educationObject = {
+    schoolName: schoolName,
+    educationStartYear: educationStartYear,
+    educationEndYear: educationEndYear,
   };
 
   return (
@@ -206,7 +225,7 @@ const Editor = () => {
                 {addingExperience === false && (
                   <button
                     onClick={() => setAddingExperience(true)}
-                    className="button add-experience"
+                    className="button add-button"
                   >
                     Add Experience
                   </button>
@@ -242,6 +261,21 @@ const Editor = () => {
                       onChange={(e) => setExperienceEndYear(e.target.value)}
                       value={experienceEndYear}
                     ></input>
+                    <div className="checkbox-wrap">
+                      <input
+                        type="checkbox"
+                        onChange={() => {
+                          if (currently === false) {
+                            setCurrently(true);
+                            setExperienceEndYear("Present");
+                          } else {
+                            setCurrently(false);
+                            setExperienceEndYear("");
+                          }
+                        }}
+                      ></input>
+                      <span>I still work here</span>
+                    </div>
                     <textarea
                       placeholder="Job Description"
                       onChange={(e) =>
@@ -259,6 +293,7 @@ const Editor = () => {
                         clearExperienceFields();
                         console.log(experienceArray);
                         setAddingExperience(false);
+                        setCurrently(false);
 
                         if (experienceArray.length == 3) {
                           setNotificationVisibile(true);
@@ -273,7 +308,7 @@ const Editor = () => {
                 {experienceArray.map((experience) => {
                   return (
                     <div class="experience-tab">
-                      {experience.experienceJobTitle}{" "}
+                      {experience.experienceJobTitle}
                       <i class="fa-solid fa-ellipsis"></i>
                     </div>
                   );
@@ -281,7 +316,63 @@ const Editor = () => {
               </>
             );
           } else if (editorView === "education") {
-            return <p>Education</p>;
+            return (
+              <>
+                {addingEducation ? (
+                  <>
+                    <input
+                      type="text"
+                      placeholder="School Name"
+                      onChange={(e) => setSchoolName(e.target.value)}
+                      value={schoolName}
+                    ></input>
+                    <input
+                      type="text"
+                      placeholder="Start Year"
+                      onChange={(e) => setEducationStartYear(e.target.value)}
+                      value={educationStartYear}
+                    ></input>
+                    <input
+                      type="text"
+                      placeholder="End Year"
+                      onChange={(e) => setEducationEndYear(e.target.value)}
+                      value={educationEndYear}
+                    ></input>
+                    <button
+                      className="button save"
+                      onClick={() => {
+                        setEducationArray([educationObject, ...educationArray]);
+                        clearEducationFields();
+                        setAddingEducation(false);
+                        setCurrently(false);
+
+                        if (educationArray.length == 3) {
+                          setNotificationVisibile(true);
+                        }
+                      }}
+                    >
+                      Save
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    onClick={() => setAddingEducation(true)}
+                    className="button add-button"
+                  >
+                    Add Education
+                  </button>
+                )}
+
+                {educationArray.map((education) => {
+                  return (
+                    <div class="experience-tab">
+                      {education.schoolName}
+                      <i class="fa-solid fa-ellipsis"></i>
+                    </div>
+                  );
+                })}
+              </>
+            );
           } else if (editorView === "skills") {
             return <p>Skills</p>;
           }
@@ -310,6 +401,11 @@ const Editor = () => {
             experienceStartYear={experienceStartYear}
             experienceEndYear={experienceEndYear}
             experienceJobDescription={experienceJobDescription}
+            addingEducation={addingEducation}
+            educationArray={educationArray}
+            schoolName={schoolName}
+            educationStartYear={educationStartYear}
+            educationEndYear={educationEndYear}
           />
         </div>
       </div>
