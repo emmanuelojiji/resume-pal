@@ -11,7 +11,7 @@ const Designer = () => {
       <div className="designer-row">
         <h4 class="designer-sub-heading">Heading</h4>
         <span>Heading colour</span>
-        <input type="color"></input>
+  
       </div>
       <div className="designer-row">
         <h4 class="designer-sub-heading">Paragraph</h4>

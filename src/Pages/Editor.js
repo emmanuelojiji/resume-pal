@@ -388,7 +388,7 @@ const Editor = () => {
               : setDesignerVisible(true)
           }
         >
-          <i class="fa-solid fa-paintbrush"></i>
+          <i class="fa-solid fa-crop-simple"></i>
         </div>
 
         <div
