@@ -4,12 +4,14 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 
 import MinimalistTemplate from "../Components/MinimalistTemplate";
+import Designer from "../Components/Designer";
 
 const Editor = () => {
   const [editorView, setEditorView] = useState("personal");
 
   const [templatesVisible, setTemplatesVisible] = useState(false);
   const [notificationVisibile, setNotificationVisibile] = useState(false);
+  const [designerVisible, setDesignerVisible] = useState(true);
 
   const [selectedTemplate, setSelectedTemplate] = useState("minimalist");
 
@@ -66,6 +68,8 @@ const Editor = () => {
 
   return (
     <div className="Editor">
+      {designerVisible && <Designer />}
+
       {notificationVisibile && (
         <div className="notification">
           Make sure you're including your best work only!
@@ -123,10 +127,6 @@ const Editor = () => {
             ></div>
           </div>
         </div>
-      </div>
-
-      <div className="design-container">
-        <span>Designer</span>
       </div>
 
       <div className="controls">
@@ -380,6 +380,17 @@ const Editor = () => {
       </div>
 
       <div className="preview">
+        <div
+          className="designer-toggle"
+          onClick={() =>
+            designerVisible
+              ? setDesignerVisible(false)
+              : setDesignerVisible(true)
+          }
+        >
+          <i class="fa-solid fa-paintbrush"></i>
+        </div>
+
         <div
           className="details-design-toggle"
           onClick={() => setTemplatesVisible(true)}
