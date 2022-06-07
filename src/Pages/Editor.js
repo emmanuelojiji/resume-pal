@@ -11,7 +11,7 @@ const Editor = () => {
 
   const [templatesVisible, setTemplatesVisible] = useState(false);
   const [notificationVisibile, setNotificationVisibile] = useState(false);
-  const [designerVisible, setDesignerVisible] = useState(true);
+  const [designerVisible, setDesignerVisible] = useState(false);
 
   const [selectedTemplate, setSelectedTemplate] = useState("minimalist");
 
