@@ -1,0 +1,33 @@
+.Designer {
+  height: 600px;
+  width: 300px;
+  background: white;
+  padding-left: 25px;
+  padding-right: 25px;
+  position: fixed;
+  bottom: 200px;
+  right: 25px;
+  z-index: 1;
+  border-radius: 8px;
+  border: solid 1px #d1d1d1;
+  border-top: 8px #1b91f0 solid;
+
+  .designer-heading {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-bottom: solid 1px #d1d1d1;
+    margin-bottom:20px;
+    margin-left: -25px;
+    margin-right: -25px;
+    padding-left: 25px;
+  }
+
+  .designer-row{
+    margin-bottom: 20px;
+  }
+
+  .designer-sub-heading{
+    margin-bottom: 10px;
+  }
+
+}

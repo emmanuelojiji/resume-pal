@@ -64,7 +64,7 @@ const MinimalistTemplate = ({
                 <span>{experience.experienceCompany}</span>
                 <div>
                   <span>
-                    {experience.experienceStartYear} -
+                    {experience.experienceStartYear} -{" "}
                     {experience.experienceEndYear}
                   </span>
                 </div>
@@ -76,7 +76,7 @@ const MinimalistTemplate = ({
       </div>
 
       <div class="content-row">
-      <span className="minimalist-heading">EDUCATION</span>
+        <span className="minimalist-heading">EDUCATION</span>
         {addingEducation && (
           <div class="page-experience-entry entry-preview">
             <span>{schoolName}</span>
@@ -96,7 +96,8 @@ const MinimalistTemplate = ({
                 <span>{education.schoolName}</span>
                 <div>
                   <span>
-                    {education.educationStartYear} -{education.educationEndYear}
+                    {education.educationStartYear} -{" "}
+                    {education.educationEndYear}
                   </span>
                 </div>
               </div>
