@@ -9,6 +9,8 @@ import Designer from "../Components/Designer";
 import UserInfoContext from "../Contexts/UserInfoContext";
 import { useContext } from "react";
 import Sidebar from "../Components/Sidebar";
+import Toolbar from "../Components/Toolbar";
+import Header from "../Components/Header";
 
 const Editor = () => {
   const {
@@ -47,14 +49,18 @@ const Editor = () => {
   } = useContext(UserInfoContext);
 
   const [selectedTemplate, setSelectedTemplate] = useState("minimalist");
-  const [templatesVisible, setTemplatesVisible] = useState(false);
   const [notificationVisible, setNotificationVisible] = useState(false);
   const [designerVisible, setDesignerVisible] = useState(false);
 
   const [addingExperience, setAddingExperience] = useState(false);
   const [addingEducation, setAddingEducation] = useState(false);
 
+  const [toolbarView, setToolbarView] = useState("information")
+
+
   return (
+    <>
+    <Header/>
     <div className="Editor">
 
       {notificationVisible && (
@@ -63,58 +69,7 @@ const Editor = () => {
         </div>
       )}
 
-      <div
-        className={`template-container ${
-          templatesVisible ? "fade-in" : "fade-out"
-        } `}
-        onClick={() => setTemplatesVisible(false)}
-      >
-        <div className="template-options">
-          <h2>Choose Template</h2>
-
-          <div className="template-preview-wrap">
-            <div>
-              <div
-                className="template-preview"
-                style={{
-                  border:
-                    selectedTemplate === "minimalist" && "4px solid #1b91f0",
-                }}
-              ></div>
-              <span class="template-preview-name">Minimalist</span>
-            </div>
-
-            <div
-              className="template-preview"
-              style={{
-                border:
-                  selectedTemplate === "minimalists" && "4px solid #1b91f0",
-              }}
-            ></div>
-
-            <div
-              className="template-preview"
-              style={{
-                border: selectedTemplate === "x" && "4px solid #1b91f0",
-              }}
-            ></div>
-
-            <div
-              className="template-preview"
-              style={{
-                border: selectedTemplate === "x" && "4px solid #1b91f0",
-              }}
-            ></div>
-
-            <div
-              className="template-preview"
-              style={{
-                border: selectedTemplate === "x" && "4px solid #1b91f0",
-              }}
-            ></div>
-          </div>
-        </div>
-      </div>
+      <Toolbar toolbarView={toolbarView}/>
 
       <Sidebar
         setNotificationVisibile={setNotificationVisible}
@@ -125,23 +80,7 @@ const Editor = () => {
       />
 
       <div className="preview">
-        <div
-          className="designer-toggle"
-          onClick={() =>
-            designerVisible
-              ? setDesignerVisible(false)
-              : setDesignerVisible(true)
-          }
-        >
-          <i class="fa-solid fa-crop-simple"></i>
-        </div>
-
-        <div
-          className="details-design-toggle"
-          onClick={() => setTemplatesVisible(true)}
-        >
-          <i class="fa-solid fa-grip"></i>
-        </div>
+      
         <div class="page">
           <MinimalistTemplate
             name={name}
@@ -165,9 +104,10 @@ const Editor = () => {
           />
         </div>
       </div>
+      </div>
 
-      {designerVisible && <Designer />}
-    </div>
+      </>
+
   );
 };
 

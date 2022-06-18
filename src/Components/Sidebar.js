@@ -78,9 +78,6 @@ const Sidebar = ({
 
   return (
     <div className="controls">
-      <Link to="/" className="back">
-        Back
-      </Link>
       <div class="controls-nav">
         <h4
           style={{ color: editorView === "personal" && "#1b91f0" }}
