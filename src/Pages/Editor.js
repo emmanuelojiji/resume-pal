@@ -56,7 +56,6 @@ const Editor = () => {
 
   return (
     <div className="Editor">
-      {designerVisible && <Designer />}
 
       {notificationVisible && (
         <div className="notification">
@@ -166,6 +165,8 @@ const Editor = () => {
           />
         </div>
       </div>
+
+      {designerVisible && <Designer />}
     </div>
   );
 };
