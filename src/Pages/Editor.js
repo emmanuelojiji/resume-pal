@@ -1,7 +1,7 @@
 import "../global.scss";
 import "./Editor.scss";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import MinimalistTemplate from "../Components/MinimalistTemplate";
 import Designer from "../Components/Designer";
@@ -10,7 +10,7 @@ import UserInfoContext from "../Contexts/UserInfoContext";
 import { useContext } from "react";
 import Sidebar from "../Components/Sidebar";
 import Toolbar from "../Components/Toolbar";
-import Header from "../Components/Header";
+import HeaderEditor from "../Components/HeaderEditor";
 
 const Editor = () => {
   const {
@@ -55,59 +55,55 @@ const Editor = () => {
   const [addingExperience, setAddingExperience] = useState(false);
   const [addingEducation, setAddingEducation] = useState(false);
 
-  const [toolbarView, setToolbarView] = useState("information")
+  const [toolbarView, setToolbarView] = useState("information");
 
 
   return (
     <>
-    <Header/>
-    <div className="Editor">
+      <HeaderEditor />
+      <div className="Editor">
+        {notificationVisible && (
+          <div className="notification">
+            Make sure you're including your best work only!
+          </div>
+        )}
 
-      {notificationVisible && (
-        <div className="notification">
-          Make sure you're including your best work only!
-        </div>
-      )}
+        <Toolbar toolbarView={toolbarView} />
 
-      <Toolbar toolbarView={toolbarView}/>
+        <Sidebar
+          setNotificationVisibile={setNotificationVisible}
+          addingExperience={addingExperience}
+          setAddingExperience={setAddingExperience}
+          addingEducation={addingEducation}
+          setAddingEducation={setAddingEducation}
+        />
 
-      <Sidebar
-        setNotificationVisibile={setNotificationVisible}
-        addingExperience={addingExperience}
-        setAddingExperience={setAddingExperience}
-        addingEducation={addingEducation}
-        setAddingEducation={setAddingEducation}
-      />
-
-      <div className="preview">
-      
-        <div class="page">
-          <MinimalistTemplate
-            name={name}
-            jobTitle={jobTitle}
-            phoneNumber={phoneNumber}
-            email={email}
-            address={address}
-            profile={profile}
-            experienceArray={experienceArray}
-            addingExperience={addingExperience}
-            experienceJobTitle={experienceJobTitle}
-            experienceCompany={experienceCompany}
-            experienceStartYear={experienceStartYear}
-            experienceEndYear={experienceEndYear}
-            experienceJobDescription={experienceJobDescription}
-            addingEducation={addingEducation}
-            educationArray={educationArray}
-            schoolName={schoolName}
-            educationStartYear={educationStartYear}
-            educationEndYear={educationEndYear}
-          />
+        <div className="preview">
+          <div class="page">
+            <MinimalistTemplate
+              name={name}
+              jobTitle={jobTitle}
+              phoneNumber={phoneNumber}
+              email={email}
+              address={address}
+              profile={profile}
+              experienceArray={experienceArray}
+              addingExperience={addingExperience}
+              experienceJobTitle={experienceJobTitle}
+              experienceCompany={experienceCompany}
+              experienceStartYear={experienceStartYear}
+              experienceEndYear={experienceEndYear}
+              experienceJobDescription={experienceJobDescription}
+              addingEducation={addingEducation}
+              educationArray={educationArray}
+              schoolName={schoolName}
+              educationStartYear={educationStartYear}
+              educationEndYear={educationEndYear}
+            />
+          </div>
         </div>
       </div>
-      </div>
-
-      </>
-
+    </>
   );
 };
 
