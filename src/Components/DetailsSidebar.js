@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import UserInfoContext from "../Contexts/UserInfoContext";
-import "./Sidebar.scss"
+import "./DetailsSidebar.scss"
 
-const Sidebar = ({
+const DetailsSidebar = ({
   setNotificationVisibile,
   addingExperience,
   setAddingExperience,
@@ -274,4 +274,4 @@ const Sidebar = ({
   );
 };
 
-export default Sidebar;
+export default DetailsSidebar;

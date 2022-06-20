@@ -1,7 +1,7 @@
 .controls {
     height: 100vh;
-    width: 25%;
-    max-width: 500px;
+    width: 100%;
+    max-width: 400px;
     background: white;
     border-right: solid 1px #e1e2e4;
     position: sticky;
@@ -42,7 +42,6 @@
     }
 
     h4 {
-      cursor: pointer;
       transition: ease-in-out 0.2s;
     }
 

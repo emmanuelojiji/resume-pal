@@ -4,13 +4,15 @@ import { Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 
 import MinimalistTemplate from "../Components/MinimalistTemplate";
-import Designer from "../Components/Designer";
+import Designer from "../Components/DesignerSidebar";
 
 import UserInfoContext from "../Contexts/UserInfoContext";
 import { useContext } from "react";
-import Sidebar from "../Components/Sidebar";
+import DetailsSidebar from "../Components/DetailsSidebar";
 import Toolbar from "../Components/Toolbar";
 import HeaderEditor from "../Components/HeaderEditor";
+import TemplateSidebar from "../Components/TemplateSidebar";
+import DesignerSidebar from "../Components/DesignerSidebar";
 
 const Editor = () => {
   const {
@@ -55,8 +57,7 @@ const Editor = () => {
   const [addingExperience, setAddingExperience] = useState(false);
   const [addingEducation, setAddingEducation] = useState(false);
 
-  const [toolbarView, setToolbarView] = useState("information");
-
+  const [toolbarView, setToolbarView] = useState("details");
 
   return (
     <>
@@ -68,38 +69,49 @@ const Editor = () => {
           </div>
         )}
 
-        <Toolbar toolbarView={toolbarView} />
+        <Toolbar toolbarView={toolbarView} setToolbarView={setToolbarView} />
 
-        <Sidebar
-          setNotificationVisibile={setNotificationVisible}
-          addingExperience={addingExperience}
-          setAddingExperience={setAddingExperience}
-          addingEducation={addingEducation}
-          setAddingEducation={setAddingEducation}
-        />
+        {toolbarView === "details" && (
+          <DetailsSidebar
+            setNotificationVisibile={setNotificationVisible}
+            addingExperience={addingExperience}
+            setAddingExperience={setAddingExperience}
+            addingEducation={addingEducation}
+            setAddingEducation={setAddingEducation}
+          />
+        )}
+
+        {toolbarView === "templates" && (
+          <TemplateSidebar selectedTemplate={selectedTemplate} />
+        )}
+
+        {toolbarView === "designer" && <DesignerSidebar />}
 
         <div className="preview">
-          <div class="page">
-            <MinimalistTemplate
-              name={name}
-              jobTitle={jobTitle}
-              phoneNumber={phoneNumber}
-              email={email}
-              address={address}
-              profile={profile}
-              experienceArray={experienceArray}
-              addingExperience={addingExperience}
-              experienceJobTitle={experienceJobTitle}
-              experienceCompany={experienceCompany}
-              experienceStartYear={experienceStartYear}
-              experienceEndYear={experienceEndYear}
-              experienceJobDescription={experienceJobDescription}
-              addingEducation={addingEducation}
-              educationArray={educationArray}
-              schoolName={schoolName}
-              educationStartYear={educationStartYear}
-              educationEndYear={educationEndYear}
-            />
+          <div className="page-wrap">
+            <h6 className="live-preview">Live Preview</h6>
+            <div class="page">
+              <MinimalistTemplate
+                name={name}
+                jobTitle={jobTitle}
+                phoneNumber={phoneNumber}
+                email={email}
+                address={address}
+                profile={profile}
+                experienceArray={experienceArray}
+                addingExperience={addingExperience}
+                experienceJobTitle={experienceJobTitle}
+                experienceCompany={experienceCompany}
+                experienceStartYear={experienceStartYear}
+                experienceEndYear={experienceEndYear}
+                experienceJobDescription={experienceJobDescription}
+                addingEducation={addingEducation}
+                educationArray={educationArray}
+                schoolName={schoolName}
+                educationStartYear={educationStartYear}
+                educationEndYear={educationEndYear}
+              />
+            </div>
           </div>
         </div>
       </div>
