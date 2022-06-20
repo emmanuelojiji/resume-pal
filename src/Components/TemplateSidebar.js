@@ -13,7 +13,7 @@ const TemplateSidebar = ({selectedTemplate}) => {
           <div className="template-preview" style={{border: selectedTemplate === "minimalist" && 'solid 1px #1b91f0'}}></div>
           <h5 style={{color: selectedTemplate === "minimalist" && '#1b91f0'}} >Minimalist</h5>
         </div>
-
+ 
         <div className="template-preview-wrap">
           <div className="template-preview"></div>
         </div>

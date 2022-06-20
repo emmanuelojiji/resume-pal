@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import UserInfoContext from "../Contexts/UserInfoContext";
-import "./DesignerSidebar.scss"
+import "./DesignerSidebar.scss";
 
 const DesignerSidebar = ({
   setNotificationVisibile,
@@ -79,8 +79,7 @@ const DesignerSidebar = ({
 
   return (
     <div className="controls">
-        <h4 className="header-title">Designer</h4>
-      
+      <h4 className="header-title">Designer</h4>
     </div>
   );
 };

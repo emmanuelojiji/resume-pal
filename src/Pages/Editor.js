@@ -13,6 +13,7 @@ import Toolbar from "../Components/Toolbar";
 import HeaderEditor from "../Components/HeaderEditor";
 import TemplateSidebar from "../Components/TemplateSidebar";
 import DesignerSidebar from "../Components/DesignerSidebar";
+import TipsSidebar from "../Components/TipsSidebar";
 
 const Editor = () => {
   const {
@@ -86,6 +87,8 @@ const Editor = () => {
         )}
 
         {toolbarView === "designer" && <DesignerSidebar />}
+
+        {toolbarView === "tips" && <TipsSidebar />}
 
         <div className="preview">
           <div className="page-wrap">
