@@ -15,7 +15,9 @@ import TemplateSidebar from "../Components/TemplateSidebar";
 import DesignerSidebar from "../Components/DesignerSidebar";
 import TipsSidebar from "../Components/TipsSidebar";
 
-const Editor = () => {
+ import { PDFExport, savePDF } from '@progress/kendo-react-pdf';
+
+const Editor = ({onClick}) => {
   const {
     name,
     setName,
@@ -60,9 +62,25 @@ const Editor = () => {
 
   const [toolbarView, setToolbarView] = useState("details");
 
+  const pdfExportComponent = useRef();
+
+  const exportPDFWithMethod = () => {
+   let element = document.querySelector('.k-grid') || document.body;
+   savePDF(element, {
+   paperSize: 'A4'
+   });
+   };
+   const exportPDFWithComponent = () => {
+   if (pdfExportComponent.current) {
+   pdfExportComponent.current.save();
+   }
+   };
+
+
+
   return (
     <>
-      <HeaderEditor />
+      <HeaderEditor onClick={exportPDFWithComponent} />
       <div className="Editor">
         {notificationVisible && (
           <div className="notification">
@@ -93,6 +111,7 @@ const Editor = () => {
         <div className="preview">
           <div className="page-wrap">
             <h6 className="live-preview">Live Preview</h6>
+            <PDFExport ref={pdfExportComponent} paperSize="A4">
             <div class="page">
               <MinimalistTemplate
                 name={name}
@@ -115,6 +134,7 @@ const Editor = () => {
                 educationEndYear={educationEndYear}
               />
             </div>
+            </PDFExport>
           </div>
         </div>
       </div>

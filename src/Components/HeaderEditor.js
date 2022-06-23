@@ -2,7 +2,7 @@ import "./HeaderEditor.scss";
 
 import { Link } from "react-router-dom";
 
-const HeaderEditor = () => {
+const HeaderEditor = ({onClick}) => {
   return (
     <header>
       <div className="page-width">
@@ -10,7 +10,7 @@ const HeaderEditor = () => {
 
         <div>
           <button>Share</button>
-          <button>Download</button>
+          <button onClick={onClick}>Download</button>
         </div>
       </div>
     </header>
