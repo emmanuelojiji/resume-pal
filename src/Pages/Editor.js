@@ -1,14 +1,19 @@
 import "../global.scss";
 import "./Editor.scss";
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import MinimalistTemplate from "../Components/MinimalistTemplate";
-import Designer from "../Components/Designer";
+import Designer from "../Components/DesignerSidebar";
 
 import UserInfoContext from "../Contexts/UserInfoContext";
 import { useContext } from "react";
-import Sidebar from "../Components/Sidebar";
+import DetailsSidebar from "../Components/DetailsSidebar";
+import Toolbar from "../Components/Toolbar";
+import HeaderEditor from "../Components/HeaderEditor";
+import TemplateSidebar from "../Components/TemplateSidebar";
+import DesignerSidebar from "../Components/DesignerSidebar";
+import TipsSidebar from "../Components/TipsSidebar";
 
 const Editor = () => {
   const {
@@ -47,127 +52,73 @@ const Editor = () => {
   } = useContext(UserInfoContext);
 
   const [selectedTemplate, setSelectedTemplate] = useState("minimalist");
-  const [templatesVisible, setTemplatesVisible] = useState(false);
   const [notificationVisible, setNotificationVisible] = useState(false);
   const [designerVisible, setDesignerVisible] = useState(false);
 
   const [addingExperience, setAddingExperience] = useState(false);
   const [addingEducation, setAddingEducation] = useState(false);
 
+  const [toolbarView, setToolbarView] = useState("details");
+
   return (
-    <div className="Editor">
+    <>
+      <HeaderEditor />
+      <div className="Editor">
+        {notificationVisible && (
+          <div className="notification">
+            Make sure you're including your best work only!
+          </div>
+        )}
 
-      {notificationVisible && (
-        <div className="notification">
-          Make sure you're including your best work only!
-        </div>
-      )}
+        <Toolbar toolbarView={toolbarView} setToolbarView={setToolbarView} />
 
-      <div
-        className={`template-container ${
-          templatesVisible ? "fade-in" : "fade-out"
-        } `}
-        onClick={() => setTemplatesVisible(false)}
-      >
-        <div className="template-options">
-          <h2>Choose Template</h2>
+        {toolbarView === "details" && (
+          <DetailsSidebar
+            setNotificationVisibile={setNotificationVisible}
+            addingExperience={addingExperience}
+            setAddingExperience={setAddingExperience}
+            addingEducation={addingEducation}
+            setAddingEducation={setAddingEducation}
+          />
+        )}
 
-          <div className="template-preview-wrap">
-            <div>
-              <div
-                className="template-preview"
-                style={{
-                  border:
-                    selectedTemplate === "minimalist" && "4px solid #1b91f0",
-                }}
-              ></div>
-              <span class="template-preview-name">Minimalist</span>
+        {toolbarView === "templates" && (
+          <TemplateSidebar selectedTemplate={selectedTemplate} />
+        )}
+
+        {toolbarView === "designer" && <DesignerSidebar />}
+
+        {toolbarView === "tips" && <TipsSidebar />}
+
+        <div className="preview">
+          <div className="page-wrap">
+            <h6 className="live-preview">Live Preview</h6>
+            <div class="page">
+              <MinimalistTemplate
+                name={name}
+                jobTitle={jobTitle}
+                phoneNumber={phoneNumber}
+                email={email}
+                address={address}
+                profile={profile}
+                experienceArray={experienceArray}
+                addingExperience={addingExperience}
+                experienceJobTitle={experienceJobTitle}
+                experienceCompany={experienceCompany}
+                experienceStartYear={experienceStartYear}
+                experienceEndYear={experienceEndYear}
+                experienceJobDescription={experienceJobDescription}
+                addingEducation={addingEducation}
+                educationArray={educationArray}
+                schoolName={schoolName}
+                educationStartYear={educationStartYear}
+                educationEndYear={educationEndYear}
+              />
             </div>
-
-            <div
-              className="template-preview"
-              style={{
-                border:
-                  selectedTemplate === "minimalists" && "4px solid #1b91f0",
-              }}
-            ></div>
-
-            <div
-              className="template-preview"
-              style={{
-                border: selectedTemplate === "x" && "4px solid #1b91f0",
-              }}
-            ></div>
-
-            <div
-              className="template-preview"
-              style={{
-                border: selectedTemplate === "x" && "4px solid #1b91f0",
-              }}
-            ></div>
-
-            <div
-              className="template-preview"
-              style={{
-                border: selectedTemplate === "x" && "4px solid #1b91f0",
-              }}
-            ></div>
           </div>
         </div>
       </div>
-
-      <Sidebar
-        setNotificationVisibile={setNotificationVisible}
-        addingExperience={addingExperience}
-        setAddingExperience={setAddingExperience}
-        addingEducation={addingEducation}
-        setAddingEducation={setAddingEducation}
-      />
-
-      <div className="preview">
-        <div
-          className="designer-toggle"
-          onClick={() =>
-            designerVisible
-              ? setDesignerVisible(false)
-              : setDesignerVisible(true)
-          }
-        >
-          <i class="fa-solid fa-crop-simple"></i>
-        </div>
-
-        <div
-          className="details-design-toggle"
-          onClick={() => setTemplatesVisible(true)}
-        >
-          <i class="fa-solid fa-grip"></i>
-        </div>
-        <div class="page">
-          <MinimalistTemplate
-            name={name}
-            jobTitle={jobTitle}
-            phoneNumber={phoneNumber}
-            email={email}
-            address={address}
-            profile={profile}
-            experienceArray={experienceArray}
-            addingExperience={addingExperience}
-            experienceJobTitle={experienceJobTitle}
-            experienceCompany={experienceCompany}
-            experienceStartYear={experienceStartYear}
-            experienceEndYear={experienceEndYear}
-            experienceJobDescription={experienceJobDescription}
-            addingEducation={addingEducation}
-            educationArray={educationArray}
-            schoolName={schoolName}
-            educationStartYear={educationStartYear}
-            educationEndYear={educationEndYear}
-          />
-        </div>
-      </div>
-
-      {designerVisible && <Designer />}
-    </div>
+    </>
   );
 };
 

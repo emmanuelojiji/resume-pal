@@ -1,0 +1,44 @@
+header{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    background: #fafcfe;
+    border-bottom: solid 1px #e1e2e4;
+   
+
+
+    .page-width{
+        justify-content: space-between;
+        max-width: 100%;
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+
+    nav a{
+        margin:20px;
+        color: #848484;
+    }
+
+    button{
+        padding-top: 7px;
+        padding-bottom: 7px;
+        padding-left: 20px;
+        padding-right: 20px;
+        border-radius: 50px;
+        border: 0;
+        font-size: 14px;
+        color:white;
+
+        &:nth-child(2){
+            background: #1b91f0;
+        }
+
+        &:nth-child(1){
+            margin-right: 12px;
+            background: transparent;
+            border: solid 1px #141414;
+            color: #141414;
+        }
+    }
+
+}
+

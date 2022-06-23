@@ -20,6 +20,8 @@ const MinimalistTemplate = ({
   educationStartYear,
   educationEndYear,
 }) => {
+
+  
   return (
     <div className="MinimalistTemplate">
       <div className="minimalist-header">
