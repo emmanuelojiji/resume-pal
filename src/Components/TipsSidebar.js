@@ -15,11 +15,14 @@ const TipsSidebar = () => {
     }
   }, [experienceArray.length]);
 
+
   return (
     <div className="controls">
       <h4 className="header-title">Tips</h4>
 
-      {tipsEmpty && <p className="no-tips">No tips right now, your resume looks great!</p>}
+      {tipsEmpty && (
+        <p className="no-tips">No tips right now, your resume looks great!</p>
+      )}
 
       <div className="tip-container">
         {experienceArray.length > 3 && (
