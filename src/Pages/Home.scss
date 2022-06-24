@@ -1,4 +1,17 @@
 .Home {
+
+  .banner{
+    background: #1b91f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 70px;
+    color: white !important;
+
+    p{
+      color: white;
+    }
+  }
   .billboard {
     background: #fafcfe;
     padding-top: 100px;
