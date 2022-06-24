@@ -9,6 +9,9 @@ const Home = () => {
   return (
     <div className="Home">
       <Header />
+      <div className="banner">
+        <p>Hey! This is the development version of ResumePal. So if you find things which don't look or work correctly, don't worry!</p>
+      </div>
       <section className="billboard">
         <div className="page-width">
           <h1>We make resumes look beautiful.</h1>
