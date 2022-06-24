@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
 import UserInfoContext from "../Contexts/UserInfoContext";
-import "./DetailsSidebar.scss"
+import "./DetailsSidebar.scss";
 
 const DetailsSidebar = ({
   setNotificationVisibile,
@@ -45,7 +45,9 @@ const DetailsSidebar = ({
     setEducationArray,
   } = useContext(UserInfoContext);
 
-  const [editorView, setEditorView] = useState("personal");
+  const [personalExpanded, setPersonalExpanded] = useState(false);
+  const [workExperienceExpanded, setWorkExperienceExpanded] = useState(false);
+  const [educationExpanded, setEducationExpanded] = useState(false);
 
   const [currently, setCurrently] = useState(false);
 
@@ -79,8 +81,22 @@ const DetailsSidebar = ({
 
   return (
     <div className="controls">
-        <h4 className="header-title">Details</h4>
-      <div className="personal-view">
+      <h4 className="header-title">Details</h4>
+      <div
+        className="accordion-button"
+        onClick={() =>
+          personalExpanded
+            ? setPersonalExpanded(false)
+            : setPersonalExpanded(true)
+        }
+      >
+        Personal
+      </div>
+
+      <div
+        class="personal-expanded"
+        style={{ display: personalExpanded ? "block" : "none" }}
+      >
         <div className="input-wrap">
           <input
             type="text"
@@ -136,77 +152,85 @@ const DetailsSidebar = ({
         </div>
       </div>
 
-      <button
-        onClick={() => setAddingExperience(true)}
-        className="button add-button"
+      <div
+        className="accordion-button"
+        onClick={() =>
+          workExperienceExpanded
+            ? setWorkExperienceExpanded(false)
+            : setWorkExperienceExpanded(true)
+        }
       >
-        Add Experience
-      </button>
-
-      <h4 className="experience-title">
-        Work Experience {experienceArray.length + 1}
-      </h4>
-      <input
-        type="text"
-        placeholder="Job Title"
-        onChange={(e) => setExperienceJobTitle(e.target.value)}
-        value={experienceJobTitle}
-      ></input>
-      <input
-        type="text"
-        placeholder="Company"
-        onChange={(e) => setExperienceCompany(e.target.value)}
-        value={experienceCompany}
-        required
-      ></input>
-      <input
-        type="text"
-        placeholder="Start Year"
-        onChange={(e) => setExperienceStartYear(e.target.value)}
-        value={experienceStartYear}
-      ></input>
-      <input
-        type="text"
-        placeholder="End Year"
-        onChange={(e) => setExperienceEndYear(e.target.value)}
-        value={experienceEndYear}
-      ></input>
-      <div className="checkbox-wrap">
+        Work Experience
+      </div>
+      <div
+        className="expanded"
+        style={{ display: workExperienceExpanded ? "block" : "none" }}
+      >
+        <h4 className="experience-title">
+          Work Experience {experienceArray.length + 1}
+        </h4>
         <input
-          type="checkbox"
-          onChange={() => {
-            if (currently === false) {
-              setCurrently(true);
-              setExperienceEndYear("Present");
-            } else {
-              setCurrently(false);
-              setExperienceEndYear("");
+          type="text"
+          placeholder="Job Title"
+          onChange={(e) => setExperienceJobTitle(e.target.value)}
+          value={experienceJobTitle}
+        ></input>
+        <input
+          type="text"
+          placeholder="Company"
+          onChange={(e) => setExperienceCompany(e.target.value)}
+          value={experienceCompany}
+          required
+        ></input>
+        <input
+          type="text"
+          placeholder="Start Year"
+          onChange={(e) => setExperienceStartYear(e.target.value)}
+          value={experienceStartYear}
+        ></input>
+        <input
+          type="text"
+          placeholder="End Year"
+          onChange={(e) => setExperienceEndYear(e.target.value)}
+          value={experienceEndYear}
+        ></input>
+        <div className="checkbox-wrap">
+          <input
+            type="checkbox"
+            onChange={() => {
+              if (currently === false) {
+                setCurrently(true);
+                setExperienceEndYear("Present");
+              } else {
+                setCurrently(false);
+                setExperienceEndYear("");
+              }
+            }}
+          ></input>
+          <span>I still work here</span>
+        </div>
+        <textarea
+          placeholder="Job Description"
+          onChange={(e) => setExperienceJobDescription(e.target.value)}
+          value={experienceJobDescription}
+        ></textarea>
+        <button
+          className="button save"
+          onClick={() => {
+            setExperienceArray([experienceObject, ...experienceArray]);
+            clearExperienceFields();
+            console.log(experienceArray);
+            setAddingExperience(false);
+            setCurrently(false);
+
+            if (experienceArray.length == 3) {
+              setNotificationVisibile(true);
             }
           }}
-        ></input>
-        <span>I still work here</span>
+        >
+          Save
+        </button>
       </div>
-      <textarea
-        placeholder="Job Description"
-        onChange={(e) => setExperienceJobDescription(e.target.value)}
-        value={experienceJobDescription}
-      ></textarea>
-      <button
-        className="button save"
-        onClick={() => {
-          setExperienceArray([experienceObject, ...experienceArray]);
-          clearExperienceFields();
-          console.log(experienceArray);
-          setAddingExperience(false);
-          setCurrently(false);
-
-          if (experienceArray.length == 3) {
-            setNotificationVisibile(true);
-          }
-        }}
-      >
-        Save
-      </button>
 
       {experienceArray.map((experience) => {
         return (
@@ -217,50 +241,52 @@ const DetailsSidebar = ({
         );
       })}
 
-      {addingEducation ? (
-        <>
-          <input
-            type="text"
-            placeholder="School Name"
-            onChange={(e) => setSchoolName(e.target.value)}
-            value={schoolName}
-          ></input>
-          <input
-            type="text"
-            placeholder="Start Year"
-            onChange={(e) => setEducationStartYear(e.target.value)}
-            value={educationStartYear}
-          ></input>
-          <input
-            type="text"
-            placeholder="End Year"
-            onChange={(e) => setEducationEndYear(e.target.value)}
-            value={educationEndYear}
-          ></input>
-          <button
-            className="button save"
-            onClick={() => {
-              setEducationArray([educationObject, ...educationArray]);
-              clearEducationFields();
-              setAddingEducation(false);
-              setCurrently(false);
 
-              if (educationArray.length == 3) {
-                setNotificationVisibile(true);
-              }
-            }}
-          >
-            Save
-          </button>
-        </>
-      ) : (
+<div
+        className="accordion-button"
+        onClick={() =>
+          educationExpanded
+            ? setEducationExpanded(false)
+            : setEducationExpanded(true)
+        }
+      >
+        Education
+      </div>
+      <div className="expanded" style={{display: educationExpanded ? 'block' : 'none'}}>
+        <input
+          type="text"
+          placeholder="School Name"
+          onChange={(e) => setSchoolName(e.target.value)}
+          value={schoolName}
+        ></input>
+        <input
+          type="text"
+          placeholder="Start Year"
+          onChange={(e) => setEducationStartYear(e.target.value)}
+          value={educationStartYear}
+        ></input>
+        <input
+          type="text"
+          placeholder="End Year"
+          onChange={(e) => setEducationEndYear(e.target.value)}
+          value={educationEndYear}
+        ></input>
         <button
-          onClick={() => setAddingEducation(true)}
-          className="button add-button"
+          className="button save"
+          onClick={() => {
+            setEducationArray([educationObject, ...educationArray]);
+            clearEducationFields();
+            setAddingEducation(false);
+            setCurrently(false);
+
+            if (educationArray.length == 3) {
+              setNotificationVisibile(true);
+            }
+          }}
         >
-          Add Education
+          Save
         </button>
-      )}
+      </div>
 
       {educationArray.map((education) => {
         return (
