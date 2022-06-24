@@ -94,7 +94,7 @@ const DetailsSidebar = ({
       </div>
 
       <div
-        class="personal-expanded"
+        className="expanded"
         style={{ display: personalExpanded ? "block" : "none" }}
       >
         <div className="input-wrap">
