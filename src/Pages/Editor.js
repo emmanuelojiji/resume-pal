@@ -15,9 +15,9 @@ import TemplateSidebar from "../Components/TemplateSidebar";
 import DesignerSidebar from "../Components/DesignerSidebar";
 import TipsSidebar from "../Components/TipsSidebar";
 
- import { PDFExport, savePDF } from '@progress/kendo-react-pdf';
+import { PDFExport, savePDF } from "@progress/kendo-react-pdf";
 
-const Editor = ({onClick}) => {
+const Editor = ({ onClick }) => {
   const {
     name,
     setName,
@@ -64,19 +64,12 @@ const Editor = ({onClick}) => {
 
   const pdfExportComponent = useRef();
 
-  const exportPDFWithMethod = () => {
-   let element = document.querySelector('.k-grid') || document.body;
-   savePDF(element, {
-   paperSize: 'A4'
-   });
-   };
-   const exportPDFWithComponent = () => {
-   if (pdfExportComponent.current) {
-   pdfExportComponent.current.save();
-   }
-   };
 
-
+  const exportPDFWithComponent = () => {
+    if (pdfExportComponent.current) {
+      pdfExportComponent.current.save();
+    }
+  };
 
   return (
     <>
@@ -110,30 +103,30 @@ const Editor = ({onClick}) => {
 
         <div className="preview">
           <div className="page-wrap">
-            <h6 className="live-preview">Live Preview</h6>
+            <h6 className="live-preview">LIVE PREVIEW</h6>
             <PDFExport ref={pdfExportComponent} paperSize="A4">
-            <div class="page">
-              <MinimalistTemplate
-                name={name}
-                jobTitle={jobTitle}
-                phoneNumber={phoneNumber}
-                email={email}
-                address={address}
-                profile={profile}
-                experienceArray={experienceArray}
-                addingExperience={addingExperience}
-                experienceJobTitle={experienceJobTitle}
-                experienceCompany={experienceCompany}
-                experienceStartYear={experienceStartYear}
-                experienceEndYear={experienceEndYear}
-                experienceJobDescription={experienceJobDescription}
-                addingEducation={addingEducation}
-                educationArray={educationArray}
-                schoolName={schoolName}
-                educationStartYear={educationStartYear}
-                educationEndYear={educationEndYear}
-              />
-            </div>
+              <div class="page">
+                <MinimalistTemplate
+                  name={name}
+                  jobTitle={jobTitle}
+                  phoneNumber={phoneNumber}
+                  email={email}
+                  address={address}
+                  profile={profile}
+                  experienceArray={experienceArray}
+                  addingExperience={addingExperience}
+                  experienceJobTitle={experienceJobTitle}
+                  experienceCompany={experienceCompany}
+                  experienceStartYear={experienceStartYear}
+                  experienceEndYear={experienceEndYear}
+                  experienceJobDescription={experienceJobDescription}
+                  addingEducation={addingEducation}
+                  educationArray={educationArray}
+                  schoolName={schoolName}
+                  educationStartYear={educationStartYear}
+                  educationEndYear={educationEndYear}
+                />
+              </div>
             </PDFExport>
           </div>
         </div>
