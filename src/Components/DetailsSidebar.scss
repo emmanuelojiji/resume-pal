@@ -41,6 +41,7 @@
 
     h4 {
       transition: ease-in-out 0.2s;
+      margin-bottom: 50px;
     }
 
     .header-title {
@@ -69,6 +70,10 @@
 
         &:hover{
            background: rgb(245, 245, 245);
+        }
+
+        &:nth-child(2){
+          margin-top: -50px;
         }
       }
       
