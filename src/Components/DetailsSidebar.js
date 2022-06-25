@@ -43,6 +43,8 @@ const DetailsSidebar = ({
     setExperienceArray,
     educationArray,
     setEducationArray,
+    addingYear,
+    setAddingYear,
   } = useContext(UserInfoContext);
 
   const [personalExpanded, setPersonalExpanded] = useState(false);
@@ -66,11 +68,11 @@ const DetailsSidebar = ({
   };
 
   const clearExperienceFields = () => {
-    setExperienceJobTitle();
-    setExperienceCompany();
-    setExperienceStartYear();
-    setExperienceEndYear();
-    setExperienceJobDescription();
+    setExperienceJobTitle("");
+    setExperienceCompany("");
+    setExperienceStartYear("");
+    setExperienceEndYear("");
+    setExperienceJobDescription("");
   };
 
   const clearEducationFields = () => {
@@ -110,7 +112,15 @@ const DetailsSidebar = ({
           <input
             type="text"
             placeholder="Job Title"
-            onChange={(e) => setJobTitle(e.target.value)}
+            onChange={(e) => {
+              setJobTitle(e.target.value);
+
+              if (e.target.value > 0) {
+                setAddingYear(true);
+              } else {
+                setAddingYear(false);
+              }
+            }}
             value={jobTitle}
           ></input>
         </div>
@@ -166,9 +176,7 @@ const DetailsSidebar = ({
         className="expanded"
         style={{ display: workExperienceExpanded ? "block" : "none" }}
       >
-        <h4 className="experience-title">
-          Work Experience {experienceArray.length + 1}
-        </h4>
+        <h4 className="experience-title">Entry {experienceArray.length + 1}</h4>
         <input
           type="text"
           placeholder="Job Title"
@@ -185,7 +193,15 @@ const DetailsSidebar = ({
         <input
           type="text"
           placeholder="Start Year"
-          onChange={(e) => setExperienceStartYear(e.target.value)}
+          onChange={(e) => {
+            setExperienceStartYear(e.target.value);
+
+            if (e.target.value) {
+              setAddingYear(true);
+            } else {
+              setAddingYear(false);
+            }
+          }}
           value={experienceStartYear}
         ></input>
         <input
@@ -241,8 +257,7 @@ const DetailsSidebar = ({
         );
       })}
 
-
-<div
+      <div
         className="accordion-button"
         onClick={() =>
           educationExpanded
@@ -252,7 +267,10 @@ const DetailsSidebar = ({
       >
         Education
       </div>
-      <div className="expanded" style={{display: educationExpanded ? 'block' : 'none'}}>
+      <div
+        className="expanded"
+        style={{ display: educationExpanded ? "block" : "none" }}
+      >
         <input
           type="text"
           placeholder="School Name"
