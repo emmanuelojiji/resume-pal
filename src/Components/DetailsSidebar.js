@@ -85,9 +85,7 @@ const DetailsSidebar = ({
 
   const jobTitleInput = useRef();
 
-  useEffect(() => {
-    jobTitleInput.current.value = "hey"
-  })
+  
 
   return (
     <div className="controls">
