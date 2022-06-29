@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useState, useRef, useEffect } from "react";
 import UserInfoContext from "../Contexts/UserInfoContext";
 import "./DetailsSidebar.scss";
+
 
 const DetailsSidebar = ({
   setNotificationVisibile,
@@ -43,6 +44,8 @@ const DetailsSidebar = ({
     setExperienceArray,
     educationArray,
     setEducationArray,
+    addingYear,
+    setAddingYear,
   } = useContext(UserInfoContext);
 
   const [personalExpanded, setPersonalExpanded] = useState(false);
@@ -66,18 +69,25 @@ const DetailsSidebar = ({
   };
 
   const clearExperienceFields = () => {
-    setExperienceJobTitle();
-    setExperienceCompany();
-    setExperienceStartYear();
-    setExperienceEndYear();
-    setExperienceJobDescription();
+    setExperienceJobTitle("");
+    setExperienceCompany("");
+    setExperienceStartYear("");
+    setExperienceEndYear("");
+    setExperienceJobDescription("");
   };
 
   const clearEducationFields = () => {
     setSchoolName("");
     setEducationStartYear("");
     setEducationEndYear("");
+    setAddingYear(false);
   };
+
+  const jobTitleInput = useRef();
+
+  useEffect(() => {
+    jobTitleInput.current.value = "hey"
+  })
 
   return (
     <div className="controls">
@@ -89,8 +99,10 @@ const DetailsSidebar = ({
             ? setPersonalExpanded(false)
             : setPersonalExpanded(true)
         }
+        style={{ background: personalExpanded && "#f5f5f5" }}
       >
         Personal
+        <i class="fa-solid fa-chevron-down"></i>
       </div>
 
       <div
@@ -110,8 +122,17 @@ const DetailsSidebar = ({
           <input
             type="text"
             placeholder="Job Title"
-            onChange={(e) => setJobTitle(e.target.value)}
+            onChange={(e) => {
+              setJobTitle(e.target.value);
+
+              if (e.target.value > 0) {
+                setAddingYear(true);
+              } else {
+                setAddingYear(false);
+              }
+            }}
             value={jobTitle}
+            ref={jobTitleInput}
           ></input>
         </div>
 
@@ -159,16 +180,16 @@ const DetailsSidebar = ({
             ? setWorkExperienceExpanded(false)
             : setWorkExperienceExpanded(true)
         }
+        style={{ background: workExperienceExpanded && "#f5f5f5" }}
       >
         Work Experience
+        <i class="fa-solid fa-chevron-down"></i>
       </div>
       <div
         className="expanded"
         style={{ display: workExperienceExpanded ? "block" : "none" }}
       >
-        <h4 className="experience-title">
-          Work Experience {experienceArray.length + 1}
-        </h4>
+        <h4 className="experience-title">Entry {experienceArray.length + 1}</h4>
         <input
           type="text"
           placeholder="Job Title"
@@ -185,7 +206,15 @@ const DetailsSidebar = ({
         <input
           type="text"
           placeholder="Start Year"
-          onChange={(e) => setExperienceStartYear(e.target.value)}
+          onChange={(e) => {
+            setExperienceStartYear(e.target.value);
+
+            if (e.target.value) {
+              setAddingYear(true);
+            } else {
+              setAddingYear(false);
+            }
+          }}
           value={experienceStartYear}
         ></input>
         <input
@@ -220,8 +249,8 @@ const DetailsSidebar = ({
             setExperienceArray([experienceObject, ...experienceArray]);
             clearExperienceFields();
             console.log(experienceArray);
-            setAddingExperience(false);
             setCurrently(false);
+            setAddingYear(false);
 
             if (experienceArray.length == 3) {
               setNotificationVisibile(true);
@@ -232,27 +261,46 @@ const DetailsSidebar = ({
         </button>
       </div>
 
-      {experienceArray.map((experience) => {
+      {experienceArray.map((experience, index) => {
         return (
           <div class="experience-tab">
             {experience.experienceJobTitle}
-            <i class="fa-solid fa-ellipsis"></i>
+
+            <div className="menu-container">
+              <i class="fa-solid fa-ellipsis" key={index}></i>
+              <div className="edit-delete-menu">
+                <span
+                  onClick={() => {
+                    setWorkExperienceExpanded(true);
+                    
+                    console.log(jobTitleInput.current.value)
+                  }}
+                >
+                  Edit
+                </span>
+                <span>Delete</span>
+              </div>
+            </div>
           </div>
         );
       })}
 
-
-<div
+      <div
         className="accordion-button"
         onClick={() =>
           educationExpanded
             ? setEducationExpanded(false)
             : setEducationExpanded(true)
         }
+        style={{ background: educationExpanded && "#f5f5f5" }}
       >
         Education
+        <i class="fa-solid fa-chevron-down"></i>
       </div>
-      <div className="expanded" style={{display: educationExpanded ? 'block' : 'none'}}>
+      <div
+        className="expanded"
+        style={{ display: educationExpanded ? "block" : "none" }}
+      >
         <input
           type="text"
           placeholder="School Name"

@@ -3,25 +3,27 @@ import { createContext, useState } from "react";
 const UserInfoContext = createContext();
 
 export const UserInfoProvider = ({ children }) => {
-  const [name, setName] = useState();
-  const [profile, setProfile] = useState();
-  const [jobTitle, setJobTitle] = useState();
-  const [address, setAddress] = useState();
-  const [phoneNumber, setPhoneNumber] = useState();
-  const [email, setEmail] = useState();
+  const [name, setName] = useState("");
+  const [profile, setProfile] = useState("");
+  const [jobTitle, setJobTitle] = useState("");
+  const [address, setAddress] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [email, setEmail] = useState("");
 
-  const [experienceJobTitle, setExperienceJobTitle] = useState();
-  const [experienceCompany, setExperienceCompany] = useState();
-  const [experienceStartYear, setExperienceStartYear] = useState();
-  const [experienceEndYear, setExperienceEndYear] = useState();
-  const [experienceJobDescription, setExperienceJobDescription] = useState();
+  const [experienceJobTitle, setExperienceJobTitle] = useState("");
+  const [experienceCompany, setExperienceCompany] = useState("");
+  const [experienceStartYear, setExperienceStartYear] = useState("");
+  const [experienceEndYear, setExperienceEndYear] = useState("");
+  const [experienceJobDescription, setExperienceJobDescription] = useState("");
 
-  const [schoolName, setSchoolName] = useState();
-  const [educationStartYear, setEducationStartYear] = useState();
-  const [educationEndYear, setEducationEndYear] = useState();
+  const [schoolName, setSchoolName] = useState("");
+  const [educationStartYear, setEducationStartYear] = useState("");
+  const [educationEndYear, setEducationEndYear] = useState("");
 
   const [experienceArray, setExperienceArray] = useState([]);
   const [educationArray, setEducationArray] = useState([]);
+
+  const [addingYear, setAddingYear] = useState(false);
 
 
 
@@ -59,7 +61,9 @@ export const UserInfoProvider = ({ children }) => {
         experienceArray,
         setExperienceArray,
         educationArray,
-        setEducationArray
+        setEducationArray,
+        addingYear,
+        setAddingYear
       }}
     >
       {children}
