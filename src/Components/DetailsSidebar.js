@@ -3,7 +3,6 @@ import { useContext, useState, useRef, useEffect } from "react";
 import UserInfoContext from "../Contexts/UserInfoContext";
 import "./DetailsSidebar.scss";
 
-
 const DetailsSidebar = ({
   setNotificationVisibile,
   addingExperience,
@@ -84,8 +83,6 @@ const DetailsSidebar = ({
   };
 
   const jobTitleInput = useRef();
-
-  
 
   return (
     <div className="controls">
@@ -264,19 +261,24 @@ const DetailsSidebar = ({
           <div class="experience-tab">
             {experience.experienceJobTitle}
 
-            <div className="menu-container">
-              <i class="fa-solid fa-ellipsis" key={index}></i>
+            <div className="menu-container" key={index}>
+              <i class="fa-solid fa-ellipsis"></i>
               <div className="edit-delete-menu">
                 <span
                   onClick={() => {
-                    setWorkExperienceExpanded(true);
-                    
-                    console.log(jobTitleInput.current.value)
+                    console.log(experienceArray.length);
                   }}
                 >
                   Edit
                 </span>
-                <span>Delete</span>
+                <span
+                  onClick={() => {
+                    experienceArray.splice(index, 1);
+                    setExperienceArray([...experienceArray]);
+                  }}
+                >
+                  Delete
+                </span>
               </div>
             </div>
           </div>
