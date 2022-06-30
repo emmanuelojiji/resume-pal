@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { useContext, useState, useRef, useEffect } from "react";
 import UserInfoContext from "../Contexts/UserInfoContext";
 import "./DetailsSidebar.scss";
-
+import EntryTab from "./EntryTab";
 
 const DetailsSidebar = ({
   setNotificationVisibile,
@@ -84,8 +84,6 @@ const DetailsSidebar = ({
   };
 
   const jobTitleInput = useRef();
-
-  
 
   return (
     <div className="controls">
@@ -261,25 +259,7 @@ const DetailsSidebar = ({
 
       {experienceArray.map((experience, index) => {
         return (
-          <div class="experience-tab">
-            {experience.experienceJobTitle}
-
-            <div className="menu-container">
-              <i class="fa-solid fa-ellipsis" key={index}></i>
-              <div className="edit-delete-menu">
-                <span
-                  onClick={() => {
-                    setWorkExperienceExpanded(true);
-                    
-                    console.log(jobTitleInput.current.value)
-                  }}
-                >
-                  Edit
-                </span>
-                <span>Delete</span>
-              </div>
-            </div>
-          </div>
+          <EntryTab index={index} experience={experience} />
         );
       })}
 

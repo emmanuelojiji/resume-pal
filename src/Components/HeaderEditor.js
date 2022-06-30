@@ -10,7 +10,7 @@ const HeaderEditor = ({onClick}) => {
 
         <div>
           <button>Share</button>
-          <button onClick={onClick}>Download</button>
+          <button onClick={onClick}>Export to PDF</button>
         </div>
       </div>
     </header>
