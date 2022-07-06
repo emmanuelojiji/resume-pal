@@ -3,14 +3,14 @@ import "./EntryTab.scss";
 import UserInfoContext from "../Contexts/UserInfoContext";
 import { useState, useContext } from "react";
 
-const EntryTab = ({ experience, index }) => {
-  const { experienceArray, setExperienceArray } = useContext(UserInfoContext);
+const EducationEntryTab = ({ education, index }) => {
+  const { educationArray, setEducationArray } = useContext(UserInfoContext);
 
   const [menuVisible, setMenuVisible] = useState(false);
 
   return (
     <div class="experience-tab">
-      {experience.experienceJobTitle}
+      {education.schoolName}
 
       <div className="menu-container">
         <i
@@ -23,15 +23,15 @@ const EntryTab = ({ experience, index }) => {
           <div className="edit-delete-menu">
             <span
               onClick={() => {
-                console.log(experienceArray.length);
+                console.log(educationArray.length);
               }}
             >
               Edit
             </span>
             <span
               onClick={() => {
-                experienceArray.splice(index, 1);
-                setExperienceArray([...experienceArray]);
+                educationArray.splice(index, 1);
+                setEducationArray([...educationArray]);
               }}
             >
               Delete
@@ -43,4 +43,4 @@ const EntryTab = ({ experience, index }) => {
   );
 };
 
-export default EntryTab;
+export default EducationEntryTab;
