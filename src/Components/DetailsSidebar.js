@@ -5,7 +5,6 @@ import "./DetailsSidebar.scss";
 import EducationEntryTab from "./EducationEntryTab";
 import WorkExperienceEntryTab from "./WorkExperienceEntryTab";
 
-
 const DetailsSidebar = ({
   setNotificationVisibile,
   addingExperience,
@@ -92,11 +91,11 @@ const DetailsSidebar = ({
       <h4 className="header-title">Details</h4>
       <div
         className="accordion-button"
-        onClick={() =>
+        onClick={() => {
           personalExpanded
             ? setPersonalExpanded(false)
-            : setPersonalExpanded(true)
-        }
+            : setPersonalExpanded(true);
+        }}
         style={{ background: personalExpanded && "#f5f5f5" }}
       >
         Personal
@@ -173,11 +172,13 @@ const DetailsSidebar = ({
 
       <div
         className="accordion-button"
-        onClick={() =>
+        onClick={() =>{
           workExperienceExpanded
             ? setWorkExperienceExpanded(false)
             : setWorkExperienceExpanded(true)
-        }
+
+         
+        }}
         style={{ background: workExperienceExpanded && "#f5f5f5" }}
       >
         Work Experience
