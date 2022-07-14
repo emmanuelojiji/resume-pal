@@ -1,6 +1,7 @@
 import "./MinimalistTemplate.scss";
 import { useContext } from "react";
 import UserInfoContext from "../Contexts/UserInfoContext";
+import DesignerContext from "../Contexts/DesignerContext";
 
 const MinimalistTemplate = () => {
   const {
@@ -40,28 +41,39 @@ const MinimalistTemplate = () => {
     setAddingYear,
   } = useContext(UserInfoContext);
 
+  const { minimalistHeadingSpacing, setMinimalistHeadingSpacing } =
+    useContext(DesignerContext);
+
+  const headingStyle = {
+    letterSpacing: `${minimalistHeadingSpacing}px`,
+  };
+
   return (
     <div className="MinimalistTemplate">
       <div className="minimalist-header">
         <div className="minimalist-header-left">
-          <span className="minimalist-name">{name}</span>
-          <span className="minimalist-job-title">{jobTitle}</span>
+          <span className="minimalist-name heading" style={headingStyle}>{name}</span>
+          <span className="minimalist-job-title heading" style={headingStyle}>{jobTitle}</span>
         </div>
 
         <div className="minimalist-header-right">
-          <span>{address}</span>
-          <span>{phoneNumber}</span>
-          <span>{email}</span>
+          <span className="g-heading" style={headingStyle}>{address}</span>
+          <span className="g-heading" style={headingStyle}>{phoneNumber}</span>
+          <span className="g-heading" style={headingStyle}>{email}</span>
         </div>
       </div>
 
       <div class="content-row">
-        <span className="minimalist-heading">PROFILE</span>
+        <span className="minimalist-sub-heading heading g-heading" style={headingStyle}>
+          PROFILE
+        </span>
         <span>{profile}</span>
       </div>
 
       <div class="content-row">
-        <span className="minimalist-heading">EXPERIENCE</span>
+        <span className="minimalist-sub-heading g-heading" style={headingStyle}>
+          EXPERIENCE
+        </span>
 
         <div class="page-experience-entry entry-preview">
           <span>{experienceJobTitle}</span>
@@ -94,7 +106,7 @@ const MinimalistTemplate = () => {
       </div>
 
       <div class="content-row">
-        <span className="minimalist-heading">EDUCATION</span>
+        <span className="minimalist-sub-heading g-heading" style={headingStyle}>EDUCATION</span>
 
         <div class="page-experience-entry entry-preview">
           <span>{schoolName}</span>

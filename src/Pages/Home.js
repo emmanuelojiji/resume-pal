@@ -19,7 +19,7 @@ const Home = () => {
             With our simple and interactive editor, you can be job ready within
             minutes.
           </p>
-          <Link to="/editor" className="button">
+          <Link to="/editor" className="button"> 
             Create My Resume
           </Link>
 
@@ -79,25 +79,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="features">
-        <div className="page-width">
-          <h2>An interactive life tool</h2>
-
-          <div className="feature-box-container">
-            <div className="feature-box">
-              <h3>Live Preview</h3>
-            </div>
-
-            <div className="feature-box">
-              <h3>Smart Suggestions</h3>
-            </div>
-
-            <div className="feature-box">
-              <h3>Modern Templates</h3>
-            </div>
-          </div>
-        </div>
-      </section>
+      
     </div>
   );
 };

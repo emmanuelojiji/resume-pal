@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import { useContext, useState, useRef, useEffect } from "react";
 import UserInfoContext from "../Contexts/UserInfoContext";
 import "./DetailsSidebar.scss";
-import EntryTab from "./EntryTab";
+import EducationEntryTab from "./EducationEntryTab";
+import WorkExperienceEntryTab from "./WorkExperienceEntryTab";
 
 const DetailsSidebar = ({
   setNotificationVisibile,
@@ -90,11 +91,11 @@ const DetailsSidebar = ({
       <h4 className="header-title">Details</h4>
       <div
         className="accordion-button"
-        onClick={() =>
+        onClick={() => {
           personalExpanded
             ? setPersonalExpanded(false)
-            : setPersonalExpanded(true)
-        }
+            : setPersonalExpanded(true);
+        }}
         style={{ background: personalExpanded && "#f5f5f5" }}
       >
         Personal
@@ -171,11 +172,13 @@ const DetailsSidebar = ({
 
       <div
         className="accordion-button"
-        onClick={() =>
+        onClick={() =>{
           workExperienceExpanded
             ? setWorkExperienceExpanded(false)
             : setWorkExperienceExpanded(true)
-        }
+
+         
+        }}
         style={{ background: workExperienceExpanded && "#f5f5f5" }}
       >
         Work Experience
@@ -258,9 +261,7 @@ const DetailsSidebar = ({
       </div>
 
       {experienceArray.map((experience, index) => {
-        return (
-          <EntryTab index={index} experience={experience} />
-        );
+        return <WorkExperienceEntryTab index={index} experience={experience} />;
       })}
 
       <div
@@ -279,6 +280,7 @@ const DetailsSidebar = ({
         className="expanded"
         style={{ display: educationExpanded ? "block" : "none" }}
       >
+        <h4 className="experience-title">Entry {educationArray.length + 1}</h4>
         <input
           type="text"
           placeholder="School Name"
@@ -314,13 +316,8 @@ const DetailsSidebar = ({
         </button>
       </div>
 
-      {educationArray.map((education) => {
-        return (
-          <div class="experience-tab">
-            {education.schoolName}
-            <i class="fa-solid fa-ellipsis"></i>
-          </div>
-        );
+      {educationArray.map((education, index) => {
+        return <EducationEntryTab index={index} education={education} />;
       })}
     </div>
   );

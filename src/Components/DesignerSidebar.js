@@ -1,85 +1,23 @@
 import { Link } from "react-router-dom";
 import { useContext, useState } from "react";
-import UserInfoContext from "../Contexts/UserInfoContext";
 import "./DesignerSidebar.scss";
+import DesignerContext from "../Contexts/DesignerContext";
 
-const DesignerSidebar = ({
-  setNotificationVisibile,
-  addingExperience,
-  setAddingExperience,
-  addingEducation,
-  setAddingEducation,
-}) => {
-  const {
-    name,
-    setName,
-    profile,
-    setProfile,
-    jobTitle,
-    setJobTitle,
-    address,
-    setAddress,
-    phoneNumber,
-    setPhoneNumber,
-    email,
-    setEmail,
-    experienceJobTitle,
-    setExperienceJobTitle,
-    experienceCompany,
-    setExperienceCompany,
-    experienceStartYear,
-    setExperienceStartYear,
-    experienceEndYear,
-    setExperienceEndYear,
-    experienceJobDescription,
-    setExperienceJobDescription,
-    schoolName,
-    setSchoolName,
-    educationStartYear,
-    setEducationStartYear,
-    educationEndYear,
-    setEducationEndYear,
-    experienceArray,
-    setExperienceArray,
-    educationArray,
-    setEducationArray,
-  } = useContext(UserInfoContext);
-
-  const [editorView, setEditorView] = useState("personal");
-
-  const [currently, setCurrently] = useState(false);
-
-  const experienceObject = {
-    experienceJobTitle: experienceJobTitle,
-    experienceCompany: experienceCompany,
-    experienceStartYear: experienceStartYear,
-    experienceEndYear: experienceEndYear,
-    experienceJobDescription: experienceJobDescription,
-  };
-
-  const educationObject = {
-    schoolName: schoolName,
-    educationStartYear: educationStartYear,
-    educationEndYear: educationEndYear,
-  };
-
-  const clearExperienceFields = () => {
-    setExperienceJobTitle();
-    setExperienceCompany();
-    setExperienceStartYear();
-    setExperienceEndYear();
-    setExperienceJobDescription();
-  };
-
-  const clearEducationFields = () => {
-    setSchoolName("");
-    setEducationStartYear("");
-    setEducationEndYear("");
-  };
-
+const DesignerSidebar = () => {
+  const { minimalistHeadingSpacing, setMinimalistHeadingSpacing } =
+    useContext(DesignerContext);
   return (
     <div className="controls">
       <h4 className="header-title">Designer</h4>
+
+      <div>
+        <span>Heading</span>
+        <span>Letter Spacing</span>
+        <input
+          type="range" min="0" max="5" defaultValue={minimalistHeadingSpacing}
+          onChange={(e) =>{ setMinimalistHeadingSpacing(e.target.value); console.log(e.target.value)}}
+        ></input>
+      </div>
     </div>
   );
 };
